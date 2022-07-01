@@ -14,7 +14,7 @@ router.get('/myprofile', async function (req, res) {
   let user = await db.get().collection('users').findOne({ _id: ObjectId(req.session.user) })
   let uploads = await db.get().collection('uploads').find({ "user": req.session.user }).toArray()
   if (user) {
-    res.render('myprofile', { user, uploads })
+    res.json({ user, uploads });
   } else {
     res.redirect('/login')
   }
@@ -22,9 +22,9 @@ router.get('/myprofile', async function (req, res) {
 
 router.get('/', async function (req, res) {
   if (req.session.admin === true) {
-    res.render('index', { admin: true });
+    res.json({ admin: true });
   } else {
-    res.render('index');
+    res.json('index');
   }
 });
 
@@ -51,7 +51,7 @@ router.get('/list', async function (req, res) {
   req.session.url = '/list'
   if (req.session.user) {
     let listdata = await db.get().collection('list').find({ userid: req.session.user }).toArray()
-    res.render('list', { listdata });
+    res.json('list', { listdata });
   } else {
     res.redirect('/login')
   }
@@ -64,11 +64,11 @@ router.get('/deletelist/:id', async function (req, res) {
 });
 
 router.get('/about', async function (req, res) {
-  res.render('about');
+  res.json('about');
 });
 
 router.get('/admin', async function (req, res) {
-  res.render('admin');
+  res.json('admin');
 });
 
 router.get('/login', function (req, res) {
@@ -76,17 +76,17 @@ router.get('/login', function (req, res) {
     res.redirect('/users/')
   }
   if (req.session.loggedfalse) {
-    res.render('login', { err: true });
+    res.json('login', { err: true });
   } else {
-    res.render('login');
+    res.json('login');
   }
 });
 
 router.get('/signup', (req, res) => {
   if (req.session.signupstatusfalse) {
-    res.render('signup', { err: true })
+    res.json('signup', { err: true })
   } else
-    res.render('signup')
+    res.json('signup')
 })
 
 router.get('/delete/:id', async function (req, res) {
@@ -104,13 +104,13 @@ router.get('/deleteupload/:id', async function (req, res) {
 router.get('/edit/:id', async function (req, res) {
   let id = req.params.id
   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
-  res.render('edit', { data })
+  res.json('edit', { data })
 });
  
 router.get('/editupload/:id', async function (req, res) {
   let id = req.params.id
   let upload = await db.get().collection('uploads').findOne({ _id: ObjectId(id) })
-  res.render('editupload', { upload })
+  res.json('editupload', { upload })
 });
 
 router.post('/edit', async function (req, res) {
@@ -134,15 +134,15 @@ router.get('/courses', async function (req, res) {
   req.session.url = req.route.path
   let data = await db.get().collection('data').find({ "item": "courses" }).toArray()
   if (req.session.admin === true) {
-    res.render('courses', { data, admin: true });
+    res.json('courses', { data, admin: true });
   } else {
-    res.render('courses', { data });
+    res.json('courses', { data });
   }
 });
 
 router.get('/add:parameter', async function (req, res) {
   let parameter = req.params.parameter
-  res.render('add', { parameter });
+  res.json('add', { parameter });
 });
 
 router.post('/add', async function (req, res) {
@@ -157,9 +157,9 @@ router.post('/admin', async function (req, res) {
   if (admindata.gmail === "gbroz@123", admindata.password === "9846551975") {
     req.session.admin = true
     let users = await db.get().collection('users').find().toArray()
-    res.render('admindata', { users });
+    res.json('admindata', { users });
   } else {
-    res.render('admin');
+    res.json('admin');
   }
 });
 
@@ -171,9 +171,9 @@ router.get('/videos/:course/:semester/:subject', async function (req, res) {
   url = course + '/' + semester + '/' + subject
   req.session.url = url
   if (req.session.admin === true) {
-    res.render('module', { course, semester, subject, admin: true });
+    res.json('module', { course, semester, subject, admin: true });
   } else {
-    res.render('module', { course, semester, subject });
+    res.json('module', { course, semester, subject });
   }
 });
 
@@ -188,9 +188,9 @@ router.get('/videos/:course/:semester/:subject/:module', async function (req, re
   let uploads = await db.get().collection('uploads').find({ "item": videoid, "type": "link" }).toArray()
   let playlists = await db.get().collection('uploads').find({ "item": videoid , "type":"playlist" }).toArray()
   if (req.session.admin === true) {
-    res.render('videos', { course, semester, subject, uploads, module , playlists , admin: true });
+    res.json('videos', { course, semester, subject, uploads, module , playlists , admin: true });
   } else {
-    res.render('videos', { course, semester, subject, uploads ,module ,playlists });
+    res.json('videos', { course, semester, subject, uploads ,module ,playlists });
   }
 });
 
@@ -204,9 +204,9 @@ router.get('/videos/:course/:semester/:subject/:module', async function (req, re
 //   let uploads = await db.get().collection('uploads').find({ "item": videoid, "type": "link" }).toArray()
 //   let playlists = await db.get().collection('uploads').find({ "item": videoid , "type":"playlist" }).toArray()
 //   if (req.session.admin === true) {
-//     res.render('videos', { course, semester, subject, uploads, playlists , admin: true });
+//     res.json('videos', { course, semester, subject, uploads, playlists , admin: true });
 //   } else {
-//     res.render('videos', { course, semester, subject, uploads ,playlists });
+//     res.json('videos', { course, semester, subject, uploads ,playlists });
 //   }
 // });
 
@@ -216,9 +216,9 @@ router.get('/course/:course', async function (req, res) {
   req.session.url = url
   let data = await db.get().collection('data').find({ "item": course }).toArray()
   if (req.session.admin === true) {
-    res.render('semester', { data, course, admin: true });
+    res.json('semester', { data, course, admin: true });
   } else {
-    res.render('semester', { data, course });
+    res.json('semester', { data, course });
   }
 });
 
@@ -230,9 +230,9 @@ router.get('/:course/:semester', async function (req, res) {
   req.session.url = url
   let data = await db.get().collection('data').find({ "item": subjectid }).toArray()
   if (req.session.admin === true) {
-    res.render('subject', { course, semester, data, admin: true });
+    res.json('subject', { course, semester, data, admin: true });
   } else {
-    res.render('subject', { course, semester, data });
+    res.json('subject', { course, semester, data });
   }
 });
 
@@ -245,9 +245,9 @@ router.get('/:course/:semester/:subject', async function (req, res) {
   req.session.url = url
   let data = await db.get().collection('data').find({ "item": typeid }).toArray()
   if (req.session.admin === true) {
-    res.render('type', { course, semester, subject, data, admin: true });
+    res.json('type', { course, semester, subject, data, admin: true });
   } else {
-    res.render('type', { course, semester, subject, data });
+    res.json('type', { course, semester, subject, data });
   }
 });
 
@@ -261,12 +261,12 @@ router.get('/:course/:semester/:subject/:type', async function (req, res) {
   req.session.url = url
   let uploads = await db.get().collection('uploads').find({ "item": fileid }).toArray()
   if (req.session.admin) {
-    res.render('files', { course, semester, subject, type, uploads, admin: true });
+    res.json('files', { course, semester, subject, type, uploads, admin: true });
   } else {
     if (req.session.user) {
-      res.render('files', { course, semester, subject, type, uploads, users: true });
+      res.json('files', { course, semester, subject, type, uploads, users: true });
     } else {
-      res.render('files', { course, semester, subject, type, uploads });
+      res.json('files', { course, semester, subject, type, uploads });
     }
   }
 });
@@ -285,19 +285,19 @@ router.get('/:course/:semester/:subject/:type/:id/:filename', async function (re
   console.log(file);
   let blogname = "Calicut University " + course+" "+ semester+" "+ subject+" " + type + " download | " + file.filename
   let blogdesc = "Calicut University " + course+" "+ semester+" "+ subject+" " + type + " You can download from here.. Studocu place for calicut university students | " + file.filename
-  res.render('fileframe', { file, course, semester, subject, type, blogname,blogdesc });
+  res.json('fileframe', { file, course, semester, subject, type, blogname,blogdesc });
 })
 
 router.get('/upload:parameter', async function (req, res) {
   let user = await db.get().collection('users').findOne({ _id: ObjectId(req.session.user) })
   let parameter = req.params.parameter
-  res.render('upload', { parameter, user });
+  res.json('upload', { parameter, user });
 });
 
 router.get('/pdfupload:parameter', async function (req, res) {
   let user = await db.get().collection('users').findOne({ _id: ObjectId(req.session.user) })
   let parameter = req.params.parameter
-  res.render('uploadpdf', { parameter, user });
+  res.json('uploadpdf', { parameter, user });
 });
 
 router.post('/upload', async function (req, res) {
