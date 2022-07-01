@@ -1,0 +1,107 @@
+<div class="main">
+    <h1 class="head">{{subject}}</h1>
+    <div class="buttons">
+            <a class="but" href="/{{course}}/{{semester}}/{{subject}}/Previous-Question-Papers">Previous-Question-Papers</a>
+        {{#each data}}
+        <div class="but">
+            {{#if ../admin}}
+            <a href="/delete/{{this._id}}" class="delete"><i
+                    class="far fa-trash-alt"></i></a>
+            <a href="/edit/{{this._id}}" class="edit"><i class="far fa-edit"></i></a>
+            {{/if}}
+            <a href="/{{../course}}/{{../semester}}/{{../subject}}/{{this.name}}"> {{this.name}}</a>
+        </div> 
+        {{/each}}
+            <a class="but" href="/{{course}}/{{semester}}/{{subject}}/Study-Materials">PDF</a>
+        <a href="/videos/{{course}}/{{semester}}/{{subject}}" class="vidbut btn btn-info"> Videos </a>
+    </div>
+    <a href="/add{{course}}{{semester}}{{subject}}" class="add btn btn-success mt-5"> Add Item </a>
+</div>
+
+
+
+
+<style>
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .head {
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        margin: 10px;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 7vh;
+        position: relative;
+    }
+
+    .but {
+        margin: 10px;
+        width: 90vw;
+        height: 10vh;
+        padding: 3px;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background: linear-gradient(90deg,
+                rgba(20, 159, 255, 1) 0%,
+                rgba(17, 122, 255, 1) 100%);
+    }
+    .but:hover{
+        color: white;
+    }
+
+    .delete {
+        position: absolute;
+        right: 25px;
+    }
+
+    .edit {
+        position: absolute;
+        right: 55px;
+    }
+
+    .add {
+        width: 100vw;
+        height: 7vh;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+    }
+
+    .vidbut {
+        margin: 10px;
+        width: 90vw;
+        height: 10vh;
+        padding: 3px;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(90deg,
+                rgba(93, 12, 255, 1) 0%,
+                rgba(155, 0, 250, 1) 100%);
+    }
+</style>

@@ -1,0 +1,16 @@
+<form action="/pdfupload" method="post">
+  <br class="form-group">
+    <h5>Upload Pdf</h5>
+    <br>
+    <h6>Name</h6>
+    <input type="text" name="name" class="form-control mt-3">
+    <br>
+    <h6>Link</h6>
+    <input type="url" name="link" class="form-control mt-3" required>
+    <br>
+
+    <input type="text" name="item" value="{{parameter}}" hidden>
+    <input type="text" name="user" value="{{user._id}}" hidden>
+  </div>
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>

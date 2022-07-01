@@ -1,0 +1,129 @@
+<div class="vid-body">
+
+<div class="main">
+    <h1 class=" m-1 head">Videos</h1>
+    <div class="buttons">
+        {{#each uploads}}
+        <div class="vid">
+            <div class="row vid-head">
+                <h5 class="ml-4"> {{this.name}}</h5>
+                {{#if ../admin}}
+                <a href="/deleteupload/{{this._id}}" class="delete mt-1"><i class="far fa-trash-alt"></i></a>
+                {{/if}}
+            </div>
+
+            <iframe src="https://www.youtube.com/embed/{{this.link}}?controls=1" title="YouTube video player"
+                frameborder="0" class="vid-screen"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+        {{/each}}
+    </div>
+
+
+    <div class="buttons">
+        {{#each playlists}}
+        <div class="vid">
+            <div class="row vid-head">
+                <h5 class="ml-4"> {{this.name}}</h5>
+                {{#if ../admin}}
+                <a href="/deleteupload/{{this._id}}" class="delete mt-1"><i class="far fa-trash-alt"></i></a>
+                {{/if}}
+            </div>
+
+            <iframe src="https://www.youtube.com/embed/videoseries?{{this.playlist}}" title="YouTube video player"
+                frameborder="0" class="vid-screen"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+        {{/each}}
+    </div>
+        <a href="/uploadvideos{{course}}{{semester}}{{subject}}{{module}}" class="add btn btn-success mt-5"> Add Video </a>
+</div>
+
+</div>
+
+<style>
+    .vid-body{
+        background-color: rgb(39, 39, 39);
+        color: rgb(180, 180, 180);
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 0 !important;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    .vid-screen {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 56.25vw;
+    }
+
+    .vid-head {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding: 0px !important;
+        font-weight: 800;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .delete {
+        position: absolute;
+        right: 30px;
+        font-size: 17px;
+    }
+
+    .head {
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 7vh;
+    }
+
+ 
+
+    .but {
+        width: 90vw;
+        height: 10vh;
+        padding: 3px;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .add {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 7vh;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

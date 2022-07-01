@@ -1,0 +1,66 @@
+<form action="/upload" method="post">
+  <br class="form-group">
+    <h5>Upload Video</h5>
+    <br>
+    <h6>Name</h6>
+    <input type="text" name="name" class="form-control mt-3">
+    <br>
+  <select class="form-select" id="video" onchange="changed()" required aria-label="Default select example">
+  <option selected>Select Video Type</option>
+  <option value="link">Video</option>
+  <option value="playlist">Playlist</option>
+</select>
+
+    <br/>
+    <br/>
+   <h6 id="title-content"  ></h6>
+    <input type="url" id="videotag" disabled required class="form-control mt-3">
+    <input type="text" name="type" id="type" hidden class="form-control mt-3">
+    
+    <input type="text" name="item" class="form-control mt-3" value="{{parameter}}" hidden >
+    <input type="text" name="user" class="form-control mt-3" value="{{user._id}}"  hidden >
+  </div>
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+
+
+
+
+
+
+<style>
+  select{
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 16px;
+  }
+  option{
+    padding: 5px;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 17px;
+  }
+</style>
+
+
+
+<script>
+  function changed(){
+    console.log('hlo')
+    let currentv = document.getElementById('video').value
+    console.log(currentv)
+    if(currentv == 'playlist'){
+      document.getElementById('title-content').innerHTML = 'Playlist Link'
+      document.getElementById('videotag').name = 'playlist'
+      document.getElementById('type').value = 'playlist'
+      document.getElementById('videotag').disabled = false
+    }
+    if(currentv == 'link'){
+      document.getElementById('title-content').innerHTML = 'Video link'
+      document.getElementById('videotag').name = 'link'
+      document.getElementById('type').value = 'link'
+      document.getElementById('videotag').disabled = false
+    }
+  }
+</script>

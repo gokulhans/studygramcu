@@ -1,0 +1,104 @@
+<div class="login-body">
+    {{#if err}}
+    <div class="is-valid">
+        <b>Email is already existed</b>
+    </div>
+    {{/if}}
+
+    <form class="form-signin" action="/signup" method="post">
+    <h3 class="title m-3">Sign Up</h3>
+
+        <input type="text" name="name" class="form-control form-control-lg" placeholder="Name" required autofocus>
+
+        <input type="email" name="gmail"  class="form-control form-control-lg" placeholder="Email address" required
+            autofocus>
+
+        <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" required>
+        <input type="text" name="about" value="A Studocu Member" hidden>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+        <a class="mt-3" href="/login"><b>already have ...account ?</b></a>
+    </form>
+
+</div>
+
+
+
+<style>
+    input{
+        margin-top: 20px;
+    }
+    .login-body a{
+        margin-top: 20px;
+        color: #149fff;
+    }
+    .login-body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10vh;
+    }
+    label {
+        font-size: 18px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .is-valid {
+        color: red;
+        outline-color: rgb(0, 0, 0);
+        margin-top: 10px;
+    }
+
+    .btn {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgb(0, 0, 0);
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .form-signin {
+        width: 100%;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .btn{
+        background-color: #149fff;
+        color: white;
+        font-weight: 600;
+    }
+</style>

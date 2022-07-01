@@ -1,0 +1,90 @@
+<div class="main">
+    <h1 class="head">{{type}}</h1>
+    <div class="buttons">
+        {{#each uploads}}
+        <div class="but">
+        <a href="/{{../course}}/{{../semester}}/{{../subject}}/{{../type}}/{{this._id}}/{{this.name}}">{{this.name}}</a>
+        <div class="row">
+            {{#if ../admin}}
+        <a href="/deleteupload/{{this._id}}" class="delete"><i class="far fa-trash-alt"></i></a>
+        <a href="/editupload/{{this._id}}" class="edit"><i class="far fa-edit"></i></a>
+            {{/if}}
+        <a href="/list/{{this._id}}"><i {{#if ../users}} onclick="saved()" {{/if}} class="save fas fa-heart"></i></a>
+        <a href="{{this.link}}"><i class="download fas fa-download"></i></a>
+        </div>
+        </div>
+        {{/each}}
+    </div>
+    <a href="/pdfupload{{course}}{{semester}}{{subject}}{{type}}" class="add btn btn-success mt-5"> add item </a>
+</div>
+<script>
+function saved(){
+    console.log('dfsfyusdgu fssdfsd fses')
+    alert('succesfully saved')
+}
+</script> 
+<style>
+    .save{
+        font-size: 22px;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .head {
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        margin: 10px;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 7vh;
+        position: relative;
+    }
+
+    .but {
+        margin: 10px;
+        width: 90vw;
+        height: 10vh;
+        padding: 3px;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: rgb(0, 119, 255);
+    }
+
+    .row {
+        position: absolute;
+        right: 30px;
+    }
+
+    i{
+        margin-right: 10px;
+    }
+
+    .add {
+        width: 100vw;
+        height: 7vh;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+    }
+</style>

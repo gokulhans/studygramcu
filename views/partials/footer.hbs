@@ -1,0 +1,40 @@
+{{#if admin}}
+<div></div>
+{{else}}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+	.footerbox {
+		width: 100vw;
+		height: 60px;
+		background-color: rgb(255, 255, 255);
+		display: flex;
+		background-color: #149fff;
+		color:  #ffffff;
+	}
+
+	footer {
+		position: fixed;
+		bottom: 0;
+        left: 0;
+		z-index: 5;
+	}
+
+	.foot-box {
+		width: 25%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.5rem;
+	}
+</style>
+
+<footer class="footerbox">
+	<a href="/" class="foot-box"> <i class="fas fa-home"></i></a>
+	<a href="/courses" class="foot-box"> <i class="fa-solid fa-book"></i></a>
+	<a href="https://pareekshabhavan.uoc.ac.in/index.php/examination/notifications" class="foot-box"> <i class="fa-solid fa-bell"></i></a>
+	<a href="https://pareekshabhavan.uoc.ac.in" class="foot-box"><i class="fa-solid fa-graduation-cap"></i></a>
+</footer>
+
+{{/if}}
