@@ -34,7 +34,7 @@ router.get('/', async function (req, res) {
 
 router.get('/courses', async function (req, res) {
   let data = await db.get().collection('data').find({ "item": "courses" }).toArray()
-    res.json( {data:data });
+    res.json(data);
 });
 
 
