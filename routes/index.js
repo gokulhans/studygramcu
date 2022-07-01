@@ -136,7 +136,7 @@ router.get('/courses', async function (req, res) {
   if (req.session.admin === true) {
     res.json({ data, admin: true });
   } else {
-    res.json( { type:'courses', data:data });
+    res.json( {data:data });
   }
 });
 
