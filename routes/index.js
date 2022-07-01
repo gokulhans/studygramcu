@@ -134,9 +134,9 @@ router.get('/courses', async function (req, res) {
   req.session.url = req.route.path
   let data = await db.get().collection('data').find({ "item": "courses" }).toArray()
   if (req.session.admin === true) {
-    res.json('courses', { data, admin: true });
+    res.json({ data, admin: true });
   } else {
-    res.json('courses', { data });
+    res.json( { type:'courses', data:data });
   }
 });
 
