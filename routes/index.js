@@ -51,7 +51,7 @@ router.get('/:course/:semester', async function (req, res) {
   let semester = req.params.semester
   let subjectid = (course + semester);
   let data = await db.get().collection('data').find({ "item": subjectid }).toArray()
-  res.json({ course, semester, data }); // subject.hbs
+  res.json( data); // subject.hbs
 });
 
 // 5. subject
