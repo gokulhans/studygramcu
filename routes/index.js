@@ -62,7 +62,8 @@ router.get('/:course/:semester/:subject', async function (req, res) {
   let subject = req.params.subject
   let typeid = (course + semester + subject)
   let data = await db.get().collection('data').find({ "item": typeid }).toArray()
-  res.json({ course, semester, subject, data }); // type.hbs
+  res.json(data); // type.hbs
+  // res.json({ course, semester, subject, data }); // type.hbs
 });
 
 //6. type 
