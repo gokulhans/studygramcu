@@ -118,7 +118,8 @@ router.get('/videos/:course/:semester/:subject/:module', async function (req, re
   let videoid = ('videos' + course + semester + subject + module)
   let uploads = await db.get().collection('uploads').find({ "item": videoid, "type": "link" }).toArray()
   let playlists = await db.get().collection('uploads').find({ "item": videoid, "type": "playlist" }).toArray();
-  res.json({ course, semester, subject, uploads, module, playlists }); // videos.hbs
+  res.json( uploads); // videos.hbs
+  // res.json({ course, semester, subject, uploads, module, playlists }); // videos.hbs
 });
 
 
