@@ -51,7 +51,7 @@ router.get('/:course/:semester', async function (req, res) {
   let semester = req.params.semester
   let subjectid = (course + semester);
   let data = await db.get().collection('data').find({ "item": subjectid }).toArray()
-  res.json({ course, semester, data }); // subject.hbs
+  res.json( data); // subject.hbs
 });
 
 // 5. subject
@@ -62,7 +62,8 @@ router.get('/:course/:semester/:subject', async function (req, res) {
   let subject = req.params.subject
   let typeid = (course + semester + subject)
   let data = await db.get().collection('data').find({ "item": typeid }).toArray()
-  res.json({ course, semester, subject, data }); // type.hbs
+  res.json(data); // type.hbs
+  // res.json({ course, semester, subject, data }); // type.hbs
 });
 
 //6. type 
@@ -117,7 +118,8 @@ router.get('/videos/:course/:semester/:subject/:module', async function (req, re
   let videoid = ('videos' + course + semester + subject + module)
   let uploads = await db.get().collection('uploads').find({ "item": videoid, "type": "link" }).toArray()
   let playlists = await db.get().collection('uploads').find({ "item": videoid, "type": "playlist" }).toArray();
-  res.json({ course, semester, subject, uploads, module, playlists }); // videos.hbs
+  res.json( uploads); // videos.hbs
+  // res.json({ course, semester, subject, uploads, module, playlists }); // videos.hbs
 });
 
 
