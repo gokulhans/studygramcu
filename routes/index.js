@@ -75,7 +75,7 @@ router.get('/:course/:semester/:subject/:type', async function (req, res) {
   let fileid = (course + semester + subject + type)
   let uploads = await db.get().collection('uploads').find({ "item": fileid }).toArray()
   // res.json( { course, semester, subject, type, uploads, users: true });
-  res.json( { course, semester, subject, type, uploads }); // files.hbs
+  res.json(uploads); // files.hbs
 });
 
 //7. downloading files option
