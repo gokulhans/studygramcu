@@ -26,7 +26,7 @@ End pooints of backend applications and its json types...
 
 //1. home page 
 router.get('/', async function (req, res) {
-  res.json( {message:"Welcome cowboys lets start your journey ?.? tests" });
+  res.json( {message:"Welcome cowboys lets start your journey ?.? testsss" });
 });
 
 
