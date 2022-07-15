@@ -26,7 +26,11 @@ End pooints of backend applications and its json types...
 
 //1. home page 
 router.get('/', async function (req, res) {
+<<<<<<< HEAD
   res.json({ message: "Welcome cowboys lets start your journey ?.?" });
+=======
+  res.json( {message:"Welcome cowboys lets start your journey ?.? testsss" });
+>>>>>>> a1319813071949ff2b86d46debec0c96a1fa3623
 });
 
 
@@ -74,8 +78,13 @@ router.get('/:course/:semester/:subject/:type', async function (req, res) {
   let type = req.params.type
   let fileid = (course + semester + subject + type)
   let uploads = await db.get().collection('uploads').find({ "item": fileid }).toArray()
+<<<<<<< HEAD
   res.json({ course, semester, subject, type, uploads, users: true });
   res.json({ course, semester, subject, type, uploads }); // files.hbs
+=======
+  // res.json( { course, semester, subject, type, uploads, users: true });
+  res.json(uploads); // files.hbs
+>>>>>>> a1319813071949ff2b86d46debec0c96a1fa3623
 });
 
 //7. downloading files option
