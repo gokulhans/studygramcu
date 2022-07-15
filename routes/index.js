@@ -26,7 +26,7 @@ End pooints of backend applications and its json types...
 
 //1. home page 
 router.get('/', async function (req, res) {
-  res.json( {message:"Welcome cowboys lets start your journey ?.?" });
+  res.json({ message: "Welcome cowboys lets start your journey ?.?" });
 });
 
 
@@ -34,7 +34,7 @@ router.get('/', async function (req, res) {
 
 router.get('/courses', async function (req, res) {
   let data = await db.get().collection('data').find({ "item": "courses" }).toArray()
-    res.json(data);
+  res.json(data);
 });
 
 
@@ -42,7 +42,7 @@ router.get('/courses', async function (req, res) {
 router.get('/course/:course', async function (req, res) {
   course = req.params.course
   let data = await db.get().collection('data').find({ "item": course }).toArray()
-  res.json({ data:data, course:course }); // courses.hbs
+  res.json({ data: data, course: course }); // courses.hbs
 });
 
 // 4. semester
@@ -51,7 +51,7 @@ router.get('/:course/:semester', async function (req, res) {
   let semester = req.params.semester
   let subjectid = (course + semester);
   let data = await db.get().collection('data').find({ "item": subjectid }).toArray()
-  res.json( data); // subject.hbs
+  res.json(data); // subject.hbs
 });
 
 // 5. subject
@@ -74,8 +74,8 @@ router.get('/:course/:semester/:subject/:type', async function (req, res) {
   let type = req.params.type
   let fileid = (course + semester + subject + type)
   let uploads = await db.get().collection('uploads').find({ "item": fileid }).toArray()
-  res.json( { course, semester, subject, type, uploads, users: true });
-  res.json( { course, semester, subject, type, uploads }); // files.hbs
+  res.json({ course, semester, subject, type, uploads, users: true });
+  res.json({ course, semester, subject, type, uploads }); // files.hbs
 });
 
 //7. downloading files option
@@ -91,9 +91,9 @@ router.get('/:course/:semester/:subject/:type/:id/:filename', async function (re
   myArray = myArray.split(".")
   file.filename = myArray[0]
   console.log(file);
-  let blogname = "Calicut University " + course+" "+ semester+" "+ subject+" " + type + " download | " + file.filename
-  let blogdesc = "Calicut University " + course+" "+ semester+" "+ subject+" " + type + " You can download from here.. Studocu place for calicut university students | " + file.filename
-  res.json( { file, course, semester, subject, type, blogname,blogdesc }); // fileframe.hbs
+  let blogname = "Calicut University " + course + " " + semester + " " + subject + " " + type + " download | " + file.filename
+  let blogdesc = "Calicut University " + course + " " + semester + " " + subject + " " + type + " You can download from here.. Studocu place for calicut university students | " + file.filename
+  res.json({ file, course, semester, subject, type, blogname, blogdesc }); // fileframe.hbs
 })
 
 
@@ -105,7 +105,7 @@ router.get('/videos/:course/:semester/:subject', async function (req, res) {
   let moduleid = (course + semester + subject)
   url = course + '/' + semester + '/' + subject
   req.session.url = url
-    res.json( { course, semester, subject }); // module.hbs
+  res.json({ course, semester, subject }); // module.hbs
 });
 
 
@@ -118,10 +118,42 @@ router.get('/videos/:course/:semester/:subject/:module', async function (req, re
   let videoid = ('videos' + course + semester + subject + module)
   let uploads = await db.get().collection('uploads').find({ "item": videoid, "type": "link" }).toArray()
   let playlists = await db.get().collection('uploads').find({ "item": videoid, "type": "playlist" }).toArray();
-  res.json( uploads); // videos.hbs
+  res.json(uploads); // videos.hbs
   // res.json({ course, semester, subject, uploads, module, playlists }); // videos.hbs
 });
 
+// POST REQUESTS
+
+// Adding Syllabus 
+
+router.get('/add-syllabus', function (req, res) {
+  res.render('add-syllabus');
+});
+router.get('/syllabus', async function (req, res) {
+  let syllabus = await db.get().collection('syllabus').find().toArray();
+  res.json(syllabus);
+});
+
+router.post('/add-syllabus', async function (req, res) {
+  console.log(req.body);
+  db.get().collection('syllabus').insertOne(req.body);
+  res.redirect('/add-syllabus');
+});
+
+// Adding Notification 
+
+router.get('/add-noti', function (req, res) {
+  res.render('add-noti');
+});
+router.get('/noti', async function (req, res) {
+  let noti = await db.get().collection('noti').find().toArray();
+  res.json(noti);
+});
+
+router.post('/add-noti', async function (req, res) {
+  db.get().collection('noti').insertOne(req.body);
+  res.redirect('/add-noti');
+});
 
 
 
@@ -244,7 +276,7 @@ router.get('/edit/:id', async function (req, res) {
   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
   res.json('edit', { data })
 });
- 
+
 router.get('/editupload/:id', async function (req, res) {
   let id = req.params.id
   let upload = await db.get().collection('uploads').findOne({ _id: ObjectId(id) })
