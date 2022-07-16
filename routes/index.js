@@ -42,7 +42,7 @@ router.get('/courses', async function (req, res) {
 router.get('/course/:course', async function (req, res) {
   course = req.params.course
   let data = await db.get().collection('data').find({ "item": course }).toArray()
-  res.json({ data: data, course: course }); // courses.hbs
+  res.json(data); // courses.hbs
 });
 
 // 4. semester
@@ -74,8 +74,8 @@ router.get('/:course/:semester/:subject/:type', async function (req, res) {
   let type = req.params.type
   let fileid = (course + semester + subject + type)
   let uploads = await db.get().collection('uploads').find({ "item": fileid }).toArray()
-  res.json({ course, semester, subject, type, uploads, users: true });
-  res.json({ course, semester, subject, type, uploads }); // files.hbs
+  // res.json({ course, semester, subject, type, uploads, users: true });
+  res.json( uploads); // files.hbs
 });
 
 //7. downloading files option
@@ -93,7 +93,7 @@ router.get('/:course/:semester/:subject/:type/:id/:filename', async function (re
   console.log(file);
   let blogname = "Calicut University " + course + " " + semester + " " + subject + " " + type + " download | " + file.filename
   let blogdesc = "Calicut University " + course + " " + semester + " " + subject + " " + type + " You can download from here.. Studocu place for calicut university students | " + file.filename
-  res.json({ file, course, semester, subject, type, blogname, blogdesc }); // fileframe.hbs
+  res.json( file); // fileframe.hbs
 })
 
 
@@ -105,7 +105,7 @@ router.get('/videos/:course/:semester/:subject', async function (req, res) {
   let moduleid = (course + semester + subject)
   url = course + '/' + semester + '/' + subject
   req.session.url = url
-  res.json({ course, semester, subject }); // module.hbs
+  res.json( course); // module.hbs
 });
 
 
