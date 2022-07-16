@@ -149,7 +149,7 @@ router.get('/noti', async function (req, res) {
   let noti = await db.get().collection('noti').find().toArray();
   res.json(noti);
 });
-
+ 
 router.post('/add-noti', async function (req, res) {
   db.get().collection('noti').insertOne(req.body);
   res.redirect('/add-noti');
