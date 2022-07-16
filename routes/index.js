@@ -160,8 +160,8 @@ router.get('/ads', function (req, res) {
   res.render('ads');
 });
 router.get('/ads-status', async function (req, res) {
-  let noti = await db.get().collection('ads').find().toArray();
-  res.json(noti);
+  let ads = await db.get().collection('ads').find().toArray();
+  res.json(ads);
 });
 
 router.post('/ads', async function (req, res) {
