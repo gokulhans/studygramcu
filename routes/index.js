@@ -20,6 +20,7 @@ End pooints of backend applications and its json types...
 7. /:course/:semester/:subject/:type/:id/:filename/
 8. /videos/:course/:semester/:subject/
 9. /videos/:course/:semester/:subject/:module/
+10. Getting complementary subjects 
 
 */
 
@@ -123,6 +124,16 @@ router.get('/videos/:course/:semester/:subject/:module', async function (req, re
   // res.json({ course, semester, subject, uploads, module, playlists }); // videos.hbs
 });
 
+
+// //10. Getting complementary subjects 
+// router.get('/course/:course', async function (req, res) {
+//   course = req.params.course
+//   let data = await db.get().collection('data').find({ "item": course }).toArray()
+//   res.json(data); // courses.hbs
+// });
+
+
+
 // POST REQUESTS
 
 // Adding Syllabus 
@@ -162,13 +173,24 @@ router.get('/ads', function (req, res) {
 });
 router.get('/ads-status', async function (req, res) {
   let ads = await db.get().collection('ads').find().toArray();
-  res.json(ads);
+  let ad = [{
+    "ad":ads[0].ad
+  }]
+  res.json(ad);
 });
 
 router.post('/ads', async function (req, res) {
   db.get().collection('ads').remove();
-  db.get().collection('ads').insertOne(req.body);
-  res.redirect('/ads');
+  console.log(req.body);
+  if (req.body.ad) {
+    db.get().collection('ads').insertOne(req.body);
+  } else {
+    req.body.ad = 'off'
+    db.get().collection('ads').insertOne(req.body);
+    
+  }
+  
+  res.redirect('/ads-status/');
 });
 
 
