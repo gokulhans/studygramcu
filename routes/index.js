@@ -81,7 +81,7 @@ router.get('/:course/:semester/:subject/:type', async function (req, res) {
 //7. downloading files option
 router.get('/:course/:semester/:subject/:type/:id/:filename', async function (req, res) {
   let course = req.params.course
-  let semester = req.params.semester
+  let semester = req.params.semester 
   let subject = req.params.subject
   let type = req.params.type
   let id = req.params.id
