@@ -154,6 +154,21 @@ router.post('/add-noti', async function (req, res) {
   db.get().collection('noti').insertOne(req.body);
   res.redirect('/add-noti');
 });
+// Dealing With Ads
+
+router.get('/ads', function (req, res) {
+  res.render('ads');
+});
+router.get('/ads-status', async function (req, res) {
+  let noti = await db.get().collection('ads').find().toArray();
+  res.json(noti);
+});
+
+router.post('/ads', async function (req, res) {
+  db.get().collection('ads').remove();
+  db.get().collection('ads').insertOne(req.body);
+  res.redirect('/ads');
+});
 
 
 
