@@ -173,23 +173,24 @@ router.get('/ads', function (req, res) {
 });
 router.get('/ads-status', async function (req, res) {
   let ads = await db.get().collection('ads').find().toArray();
-  let ad;
-  if(ads[0]){
-   ad = [{
-    "ad":ads[0].ad
-  }]
   
-  res.json(ad);
-  }
+  // let ad;
+  // if(ads[0]){
+  //  ad = [{
+  //   "ad":ads[0].ad
+  // }]
+  
+  res.json(ads);
+  
   
 });
 
 router.post('/ads', async function (req, res) {
   db.get().collection('ads').remove();
   console.log(req.body);
-  if (req.body.ad) {
+  
     db.get().collection('ads').insertOne(req.body);
-  }
+  
   
   res.redirect('/ads-status/');
 });
