@@ -173,10 +173,14 @@ router.get('/ads', function (req, res) {
 });
 router.get('/ads-status', async function (req, res) {
   let ads = await db.get().collection('ads').find().toArray();
+  if(ads[0].ad){
   let ad = [{
     "ad":ads[0].ad
   }]
+  
   res.json(ad);
+  }
+  
 });
 
 router.post('/ads', async function (req, res) {
