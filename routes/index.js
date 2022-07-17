@@ -184,10 +184,6 @@ router.post('/ads', async function (req, res) {
   console.log(req.body);
   if (req.body.ad) {
     db.get().collection('ads').insertOne(req.body);
-  } else {
-    req.body.ad = 'off'
-    db.get().collection('ads').insertOne(req.body);
-    
   }
   
   res.redirect('/ads-status/');
