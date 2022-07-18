@@ -172,12 +172,12 @@ router.get('/add-aboutus', function (req, res) {
   res.render('add-aboutus');
 });
 router.get('/aboutus', async function (req, res) {
-  let aboutus = await db.get().collection('noti').find().toArray();
+  let aboutus = await db.get().collection('about').find().toArray();
   res.json(aboutus);
 });
  
 router.post('/add-aboutus', async function (req, res) {
-  db.get().collection('noti').insertOne(req.body);
+  db.get().collection('about').insertOne(req.body);
   res.redirect('/add-noti');
 });
 
