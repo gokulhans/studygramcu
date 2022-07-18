@@ -166,6 +166,21 @@ router.post('/add-noti', async function (req, res) {
   db.get().collection('noti').insertOne(req.body);
   res.redirect('/add-noti');
 });
+
+// About Us Page
+router.get('/add-aboutus', function (req, res) {
+  res.render('add-aboutus');
+});
+router.get('/aboutus', async function (req, res) {
+  let aboutus = await db.get().collection('noti').find().toArray();
+  res.json(aboutus);
+});
+ 
+router.post('/add-aboutus', async function (req, res) {
+  db.get().collection('noti').insertOne(req.body);
+  res.redirect('/add-noti');
+});
+
 // Dealing With Ads
 
 router.get('/ads', function (req, res) {
